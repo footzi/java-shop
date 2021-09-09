@@ -2,33 +2,22 @@ package com.java_shop.Goods;
 
 import com.java_shop.DbConnection;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-
+// Должен оперировать только коллекциями? и где писать sql запросы?
+// get /add /update /remove
 public class GoodsRepository {
-
-//    private final Statement statement;
-
-    GoodsRepository() {
-//        this.statement = new DbConnection().connect();
-    }
-
-    public static void saveGood(String name, int price) {
-//        String query = "INSERT INTO goods (name, price) VALUES ('test', 100)";
-        String query = "INSERT INTO goods (name, price) VALUES (" + "'" + name + "', " + price + ")";
-
-        System.out.println(query);
-//        String query = "SELECT * FROM goods";
+    public static Good add(Good good) {
+        String query = "INSERT INTO goods (name, price) VALUES (" + "'" + good.getName() + "', " + good.getPrice() + ")";
 
         DbConnection.executeUpdate(query);
 
-//        System.out.println(resultSet);
 
-//        try(ResultSet resultSet = this.statement.executeQuery(QUERY);) {
-//            System.out.println(resultSet);
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
+
+        return good;
+
+        // Как потом получить данные в ответе от бэка?
     }
+
+    // что делать если нам нужен другой запрос? использовать спецификацию?
+    // https://habr.com/ru/post/263033/
+    //List query(AccountSpecification specification);
 }

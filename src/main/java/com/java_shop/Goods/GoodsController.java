@@ -1,38 +1,17 @@
 package com.java_shop.Goods;
 
-import com.google.gson.Gson;
-
-import java.util.List;
+import com.java_shop.Goods.DTOs.OutputCreateGoodDTO;
 
 public class GoodsController {
-    public String getGoodById(String id) {
-        GoodsData goodsData = new GoodsData();
-        Good good = goodsData.getGoodById(id);
+    public static OutputCreateGoodDTO saveGood(String data) {
+        // разбираем data и получаем - String name, int price
+        String name = "hello";
+        int price = 10000;
 
-        Gson gson = new Gson();
-        return gson.toJson(good);
-    }
+        /// тут надо сложить name и price в InputCreateGoodDTO ??
+        Good good = GoodsService.saveGood(name, price);
 
-    /**
-     * Возможно в контроллере нужно разбирать сырые данные и прокидывать их в модель, а та в свою очередь будет сохранять их в ДАТА
-     */
-
-    // String name, int price
-    public static void saveGood() {
-        GoodsService.saveGood();
-//        GoodsData goodsData = new GoodsData();
-//
-//        int lastId = goodsData.getLastGoodId();
-//        Good good = new Good(lastId, name, price);
-//
-//        goodsData.saveGood(good);
-    }
-
-    public String getAllGoods() {
-        GoodsData goodsData = new GoodsData();
-        List<Good> allGoods = goodsData.getAllGoods();
-
-        Gson gson = new Gson();
-        return gson.toJson(allGoods);
+        // если хотим отдать на фронт объект отличный от Good
+        return new OutputCreateGoodDTO(good.getName(), good.getPrice());
     }
 }
