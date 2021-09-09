@@ -1,4 +1,4 @@
-package Goods;
+package com.java_shop.Goods;
 
 public class Good implements IGood {
     int id = 0;

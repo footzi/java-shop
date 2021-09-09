@@ -1,11 +1,12 @@
-import Goods.Good;
-import Goods.GoodsController;
+package com.java_shop;
+
+import com.java_shop.Goods.GoodsController;
 
 public class Main {
     public static void main(String[] args) {
-         getAllGoods();
-         getGood();
-//        saveGood();
+//         getAllGoods();
+//         getGood();
+        saveGood();
     }
 
     public static void getGood() {
@@ -14,10 +15,11 @@ public class Main {
     }
 
     public static void saveGood() {
-        String name = "Chocolate";
-        int price = 10000;
-
-        new GoodsController().saveGood(name, price);
+        GoodsController.saveGood();
+//        String name = "Chocolate";
+//        int price = 10000;
+//
+//        new GoodsController().saveGood(name, price);
     }
 
     public static void getAllGoods() {

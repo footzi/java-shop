@@ -1,4 +1,4 @@
-package Goods;
+package com.java_shop.Goods;
 
 import com.google.gson.Gson;
 
