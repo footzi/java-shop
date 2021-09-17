@@ -1,14 +1,12 @@
-package com.java_shop.Goods;
+package com.java_shop.Client;
 
-public class Good implements IGood {
+public class Client {
     int id;
     String name;
-    int price;
 
-    public Good(int id, String name, int price) {
+    public Client(int id, String name) {
         this.id = id;
         this.name = name;
-        this.price = price;
     }
 
     public void setId(int id) {
@@ -17,10 +15,6 @@ public class Good implements IGood {
 
     public int getId() {
         return id;
-    }
-
-    public int getPrice() {
-        return price;
     }
 
     public String getName() {
