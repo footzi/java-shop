@@ -7,22 +7,6 @@ public class DbConnection {
     static final String USER = "postgres";
     static final String PASS = "admin";
 
-//    private final Statement statement;
-//    static final String QUERY = "SELECT * FROM test";
-
-    //  ResultSet rs = stmt.executeQuery(QUERY);
-//    public static Statement connect() {
-//        try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-//             Statement stmt = conn.createStatement();
-//        ) {
-//            return stmt;
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//
-//            return null;
-//        }
-//    }
-
     public static ResultSet executeQuery(String query) {
         try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
              Statement stmt = conn.createStatement();
@@ -36,16 +20,26 @@ public class DbConnection {
         }
     }
 
-    public static boolean executeUpdate(String query) {
+    /**
+     * Возвращает index созданной сущности
+     */
+    public static int executeUpdate(String query) {
         try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
              Statement stmt = conn.createStatement();
         ) {
-            stmt.executeUpdate(query);
-            return true;
+            stmt.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
+
+            ResultSet rs = stmt.getGeneratedKeys();
+
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+
+            return 0;
         } catch (SQLException e) {
             e.printStackTrace();
 
-            return false;
+            return 0;
         }
     }
 }

@@ -1,15 +1,13 @@
 package com.java_shop;
 
-import com.java_shop.Goods.GoodsController;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.bind.annotation.*;
 
+@SpringBootApplication
+@RestController
 public class Main {
     public static void main(String[] args) {
-        saveGood();
+        SpringApplication.run(Main.class, args);
     }
-
-    public static void saveGood() {
-        String body = "{name: 'Chocolate', price: 10000}";
-        GoodsController.saveGood(body);
-    }
-
 }
