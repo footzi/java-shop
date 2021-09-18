@@ -19,3 +19,6 @@ public class Good implements IGood {
         return name;
     }
 }
+
+// Good под каждую категорию со своими полями
+// Дополнительные поля описания можно делать через string:string

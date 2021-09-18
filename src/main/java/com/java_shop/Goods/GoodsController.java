@@ -23,6 +23,8 @@ public class GoodsController {
         String name = "hello";
         int price = 10000;
 
+        // DTO без конструктора с аргументами но с сеттерами
+        // GoodCreate - сделать тут и передавать в GoodsService.saveGood
         /// тут надо сложить name и price в InputCreateGoodDTO ??
 //        Good good = GoodsService.saveGood(name, price);
 
