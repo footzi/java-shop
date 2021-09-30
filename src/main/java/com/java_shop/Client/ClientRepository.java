@@ -8,6 +8,7 @@ import java.sql.SQLException;
 
 public class ClientRepository {
     public static Client add(Client client) throws SQLException {
+        // todo Заменить на более короткую строку
         String query = "INSERT INTO clients (name, surname, address, phone) VALUES (" + "'" + client.getName() + "', '" + client.getSurname() + "', '" + client.getAddress() + "', '" + client.getPhone() + "')";
 
         int newClientId = DbConnection.executeUpdate(query);

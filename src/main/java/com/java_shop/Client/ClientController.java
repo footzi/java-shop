@@ -29,7 +29,7 @@ public class ClientController {
             return ResponseEntity.created(uri).body(response.getBody());
         } catch (Exception error) {
             Response<String> response = new Response<>("", error.getMessage());
-            return ResponseEntity.badRequest().body(response.getBody());
+            return ResponseEntity.internalServerError().body(response.getBody());
         }
     }
 }

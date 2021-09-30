@@ -14,4 +14,8 @@ public class GoodsRepository {
 
         return good;
     }
+
+    public static void getById(int id) throws SQLException {
+
+    }
 }

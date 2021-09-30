@@ -21,9 +21,9 @@ public class CartController {
             CartService.buy(inputBuyCartDTO);
 
             return ResponseEntity.ok("123456");
-        } catch (SQLException error) {
+        } catch (Exception error) {
             Response<String> response = new Response<>("", error.getMessage());
-            return ResponseEntity.badRequest().body(response.getBody());
+            return ResponseEntity.internalServerError().body(response.getBody());
         }
     }
 }

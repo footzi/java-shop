@@ -1,9 +1,13 @@
+// Товары
 CREATE TABLE goods (good_id serial PRIMARY KEY, name varchar(128) NOT NULL, price integer NOT NUll);
 
-CREATE TABLE clients (client_id serial PRIMARY KEY, name varchar(128) NOT NULL, surname varchar(128), address varchar(128) NOT NULL, phone varchar(128) NOT NULL);
+// Клиенты
+CREATE TABLE clients (client_id serial PRIMARY KEY, name varchar(128) NOT NULL, surname varchar(128), address varchar(128) NOT NULL, phone varchar(32) NOT NULL UNIQUE);
 INSERT INTO clients (name, surname, address, phone) VALUES ('Vladislav', 'Manakov', '199000, Saint-Petersburg', '+70000000000')
 
+// Заказы
+CREATE TABLE orders (order_id serial PRIMARY KEY, client_id integer NOT NULL, sum integer NOT NULL, status varchar(32) NOT NULL, cart json NOT NULL);
 
-
-
+// Платежи
+CREATE TABLE payments (payment_id serial PRIMARY KEY, client_id integer NOT NULL, status varchar(32) NOT NULL, sum integer NOT NUll);
 

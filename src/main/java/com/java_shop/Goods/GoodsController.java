@@ -28,9 +28,9 @@ public class GoodsController {
             Response<Good> response = new Response<>(good);
 
             return ResponseEntity.created(uri).body(response.getBody());
-        } catch (SQLException error) {
+        } catch (Exception error) {
             Response<String> response = new Response<>("", error.getMessage());
-            return ResponseEntity.badRequest().body(response.getBody());
+            return ResponseEntity.internalServerError().body(response.getBody());
         }
     }
 }

@@ -1,18 +1,18 @@
 package com.java_shop.Cart.DTOs;
 
-import com.java_shop.Client.Client;
+import com.java_shop.Cart.CartValues;
 
 import java.util.List;
 
 public class InputBuyCartDTO {
-    private List<Integer> values;
-    private Client client;
+    private List<CartValues> values;
+    private int clientId;
 
-    public List<Integer> getValues() {
+    public List<CartValues> getValues() {
         return values;
     }
 
-    public Client getClient() {
-        return client;
+    public int getClientId() {
+        return clientId;
     }
 }
