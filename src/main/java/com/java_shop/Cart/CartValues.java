@@ -1,10 +1,10 @@
 package com.java_shop.Cart;
 
 public class CartValues {
-    private String goodId;
+    private int goodId;
     private int count;
 
-    public String getGoodId() {
+    public int getGoodId() {
         return goodId;
     }
 

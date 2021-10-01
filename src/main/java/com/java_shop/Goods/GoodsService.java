@@ -11,7 +11,7 @@ public class GoodsService {
         return GoodsRepository.add(good);
     }
 
-    public static void getById(int id) throws Exception {
-        GoodsRepository.getById(id);
+    public static Good getById(int id) throws SQLException {
+        return GoodsRepository.getById(id);
     }
 }

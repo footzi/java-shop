@@ -1,7 +1,7 @@
 package com.java_shop.Cart;
 
 import com.java_shop.Cart.DTOs.InputBuyCartDTO;
-import com.java_shop.Client.ClientService;
+import com.java_shop.Order.Order;
 import com.java_shop.Order.OrderService;
 import com.java_shop.Payment.Payment;
 import com.java_shop.Payment.PaymentService;
@@ -9,15 +9,17 @@ import com.java_shop.Payment.PaymentService;
 import java.sql.SQLException;
 
 public class CartService {
-    public static void buy(InputBuyCartDTO inputBuyCartDTO) throws Exception {
-//        int clientId = inputBuyCartDTO.getClientId();
-//        CartValues cartValues = inputBuyCartDTO
+    /**
+     * Покупка товаров и создание url для оплаты
+     */
+    public static String buy(InputBuyCartDTO inputBuyCartDTO) throws SQLException {
         // Создаем новый заказ
-        OrderService.add(inputBuyCartDTO);
+        Order order = OrderService.add(inputBuyCartDTO);
 
         // Создаем новый платеж
-//        PaymentService.add(inputBuyCartDTO);
+        Payment payment = PaymentService.add(order);
 
-//        inputBuyCartDTO.getValues().forEach(cartValues -> System.out.println(cartValues.getCount()));
+        // Генерируем ссылку для оплаты на стороннем сервисе
+        return PaymentService.generateURLforPay(payment.getId());
     }
 }

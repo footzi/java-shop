@@ -5,15 +5,25 @@ import com.java_shop.DbConnection.DbConnection;
 import java.sql.SQLException;
 
 public class PaymentRepository {
-    public static void add(Payment payment) throws SQLException {
+    /**
+     * Создание нового платежа
+     */
+    public static Payment add(Payment payment) throws SQLException {
         String values = payment.getClientId() + ",'" + payment.getStatus() + "'," + payment.getSum();
         String query = "INSERT INTO payments (client_id, status, sum) VALUES (" + values + ")";
 
-        System.out.println(query);
-//
-//        int newOrderId = DbConnection.executeUpdate(query);
-//        order.setId(newOrderId);
-//
-//        return order;
+        int newOrderId = DbConnection.executeUpdate(query);
+        payment.setId(newOrderId);
+
+        return payment;
+    }
+
+    /**
+     * Изменение статуса платежа
+     */
+    public static void changeStatus(int paymentId, PaymentStatus status) throws SQLException {
+        String query = "UPDATE payments SET status = '" + status + "' WHERE payment_id = " + paymentId;
+
+        DbConnection.executeUpdate(query);
     }
 }
