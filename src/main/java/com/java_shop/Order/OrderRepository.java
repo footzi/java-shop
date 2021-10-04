@@ -67,4 +67,15 @@ public class OrderRepository {
 
         return orders;
     }
+
+    /**
+     * Изменение статуса заказа
+     */
+    public static boolean changeStatus(int orderId, OrderStatus status) throws SQLException {
+        String query = "UPDATE orders SET status = '" + status + "' WHERE order_id = " + orderId;
+
+        int id = DbConnection.executeUpdate(query);
+
+        return id != 0;
+    }
 }

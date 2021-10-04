@@ -1,6 +1,7 @@
 package com.java_shop.Payment;
 
 import com.java_shop.Order.Order;
+import com.java_shop.Order.OrderService;
 
 import java.sql.SQLException;
 
@@ -15,17 +16,28 @@ public class PaymentService {
     }
 
     /**
+     * Получение платежа по Id
+     */
+    public static Payment getById(int paymentId) throws SQLException {
+        return PaymentRepository.getById(paymentId);
+    }
+
+    /**
      * Генерация ссылки для оплаты на стороннем сервисе
      */
-    public static String generateURLforPay(int orderId) {
-        return "/yandex-kassa?orderId=" + orderId;
+    public static String generateURLforPay(int paymentId) {
+        return "/yandex-kassa?paymentId=" + paymentId;
     }
 
     /**
      * Коллбэк на успешную оплату товара и передача по следующим этапам
      */
-    public static boolean success(int paymentId) throws SQLException{
-        return PaymentService.setPayStatus(paymentId);
+    public static boolean success(int paymentId) throws SQLException {
+        Payment payment = PaymentRepository.getById(paymentId);
+
+        boolean isChangeOrderStatus = OrderService.setPayStatus(payment.getOrderId());
+
+        return isChangeOrderStatus && PaymentService.setPayStatus(paymentId);
     }
 
     /**

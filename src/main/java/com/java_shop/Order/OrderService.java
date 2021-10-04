@@ -45,4 +45,11 @@ public class OrderService {
     public static List<OutputGetAllOrders> getAll() throws SQLException {
         return OrderRepository.getAll();
     }
+
+    /**
+     * Установка статуса "PAID"
+     */
+    public static boolean setPayStatus(int orderId) throws SQLException {
+        return OrderRepository.changeStatus(orderId, OrderStatus.PAID);
+    }
 }

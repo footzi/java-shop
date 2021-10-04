@@ -1,6 +1,10 @@
 package com.java_shop.Payment;
 
+import com.java_shop.DbConnection.DBConnectionInput;
 import com.java_shop.DbConnection.DbConnection;
+import com.java_shop.DbConnection.DbConnectionResult;
+import com.java_shop.Goods.Good;
+import com.java_shop.Order.OrderStatus;
 
 import java.sql.SQLException;
 
@@ -16,6 +20,29 @@ public class PaymentRepository {
         payment.setId(newOrderId);
 
         return payment;
+    }
+
+    /**
+     * Получение платежа по Id
+     */
+    public static Payment getById(int paymentId) throws SQLException {
+        String query = "SELECT * FROM payments WHERE payment_id = '" + paymentId + "'";
+
+        DBConnectionInput input = new DBConnectionInput()
+            .addField("payment_id", "int")
+            .addField("order_id", "int")
+            .addField("status", "string")
+            .addField("sum", "int");
+
+
+        DbConnectionResult result = DbConnection.executeQuery(query, input);
+
+        return new Payment(
+            result.getFieldInt("payment_id"),
+            result.getFieldInt("order_id"),
+            result.getFieldInt("sum"),
+            PaymentStatus.valueOf(result.getFieldString("status"))
+        );
     }
 
     /**
