@@ -9,11 +9,10 @@ public class PaymentService {
      * Создание нового платежа
      */
     public static Payment add(Order order) throws SQLException {
-        Payment payment = new Payment(0, order.getClientId(), order.getSum(), PaymentStatus.NOT_PAID);
+        Payment payment = new Payment(0, order.getId(), order.getSum(), PaymentStatus.NOT_PAID);
 
         return PaymentRepository.add(payment);
     }
-
 
     /**
      * Генерация ссылки для оплаты на стороннем сервисе
@@ -25,14 +24,14 @@ public class PaymentService {
     /**
      * Коллбэк на успешную оплату товара и передача по следующим этапам
      */
-    public static void success(int paymentId) throws SQLException{
-        PaymentService.setPayStatus(paymentId);
+    public static boolean success(int paymentId) throws SQLException{
+        return PaymentService.setPayStatus(paymentId);
     }
 
     /**
      * Установка статуса "Оплачено"
      */
-    public static void setPayStatus(int paymentId) throws SQLException {
-        PaymentRepository.changeStatus(paymentId, PaymentStatus.PAID);
+    public static boolean setPayStatus(int paymentId) throws SQLException {
+        return PaymentRepository.changeStatus(paymentId, PaymentStatus.PAID);
     }
 }

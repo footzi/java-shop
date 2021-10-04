@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.sql.SQLException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/goods")
@@ -28,7 +29,20 @@ public class GoodsController {
             Response<Good> response = new Response<>(good);
 
             return ResponseEntity.created(uri).body(response.getBody());
-        } catch (Exception error) {
+        } catch (SQLException error) {
+            Response<String> response = new Response<>("", error.getMessage());
+            return ResponseEntity.internalServerError().body(response.getBody());
+        }
+    }
+
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> getAll() {
+        try {
+            List<Good> goods = GoodsService.getAll();
+            Response<List<Good>> response = new Response<>(goods);
+
+            return ResponseEntity.ok(response.getBody());
+        } catch (SQLException error) {
             Response<String> response = new Response<>("", error.getMessage());
             return ResponseEntity.internalServerError().body(response.getBody());
         }

@@ -9,8 +9,8 @@ public class PaymentRepository {
      * Создание нового платежа
      */
     public static Payment add(Payment payment) throws SQLException {
-        String values = payment.getClientId() + ",'" + payment.getStatus() + "'," + payment.getSum();
-        String query = "INSERT INTO payments (client_id, status, sum) VALUES (" + values + ")";
+        String values = payment.getOrderId() + ",'" + payment.getStatus() + "'," + payment.getSum();
+        String query = "INSERT INTO payments (order_id, status, sum) VALUES (" + values + ")";
 
         int newOrderId = DbConnection.executeUpdate(query);
         payment.setId(newOrderId);
@@ -21,9 +21,11 @@ public class PaymentRepository {
     /**
      * Изменение статуса платежа
      */
-    public static void changeStatus(int paymentId, PaymentStatus status) throws SQLException {
+    public static boolean changeStatus(int paymentId, PaymentStatus status) throws SQLException {
         String query = "UPDATE payments SET status = '" + status + "' WHERE payment_id = " + paymentId;
 
-        DbConnection.executeUpdate(query);
+        int id = DbConnection.executeUpdate(query);
+
+        return id != 0;
     }
 }

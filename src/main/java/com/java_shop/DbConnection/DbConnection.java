@@ -3,7 +3,6 @@ package com.java_shop.DbConnection;
 import java.sql.*;
 import java.util.Map;
 
-
 public class DbConnection {
     static public final String DB_URL = "jdbc:postgresql://localhost/java_shop";
     static public final String USER = "postgres";
@@ -53,6 +52,48 @@ public class DbConnection {
             return dbConnectionResult;
         }
     }
+
+    public static DbConnectionResultList executeQueryList(String query, DBConnectionInput input) throws SQLException {
+        try (Connection conn = DriverManager.getConnection(DbConnection.DB_URL, DbConnection.USER, DbConnection.PASS);
+             Statement stmt = conn.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE)
+        ) {
+            ResultSet resultSet = stmt.executeQuery(query);
+            DbConnectionResultList resultList = new DbConnectionResultList();
+            Map<String, String> map = input.getInputMap();
+
+            while (resultSet.next()) {
+                DbConnectionResult dbConnectionResult = new DbConnectionResult();
+
+                for (Map.Entry<String, String> item : map.entrySet()) {
+                    String field = item.getKey();
+                    String type = item.getValue();
+
+                    if (type.equals("int")) {
+                        int result = resultSet.getInt(field);
+
+                        dbConnectionResult.setFieldInt(field, result);
+                    }
+
+                    if (type.equals("string")) {
+                        String result = resultSet.getString(field);
+
+                        dbConnectionResult.setFieldString(field, result);
+                    }
+                }
+
+                resultList.add(dbConnectionResult);
+            }
+            return resultList;
+        }
+    }
+
+//    public static void executeQueryObject(String query) throws SQLException {
+//        try (Connection conn = DriverManager.getConnection(DbConnection.DB_URL, DbConnection.USER, DbConnection.PASS);
+//             Statement stmt = conn.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE)
+//        ) {
+//            ResultSet resultSet = stmt.executeQuery(query);
+//        }
+//    }
 
     /**
      * Возвращает index созданной сущности

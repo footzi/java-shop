@@ -3,6 +3,7 @@ package com.java_shop.Order;
 import com.java_shop.Cart.CartValues;
 import com.java_shop.Cart.DTOs.InputBuyCartDTO;
 import com.java_shop.Goods.GoodsService;
+import com.java_shop.Order.DTOs.OutputGetAllOrders;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -36,5 +37,12 @@ public class OrderService {
         }
 
         return sum;
+    }
+
+    /**
+     * Получение списка всех заказов
+     */
+    public static List<OutputGetAllOrders> getAll() throws SQLException {
+        return OrderRepository.getAll();
     }
 }

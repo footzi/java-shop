@@ -1,6 +1,6 @@
 package com.java_shop.Order;
 
-enum OrderStatus {
+public enum OrderStatus {
     CREATED,
     PAID,
     SEND_TO_DELIVERY,

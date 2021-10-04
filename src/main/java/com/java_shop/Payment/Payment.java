@@ -2,13 +2,13 @@ package com.java_shop.Payment;
 
 public class Payment {
     int id;
-    int clientId;
+    int orderId;
     int sum;
     PaymentStatus status;
 
-    Payment(int id, int clientId, int sum, PaymentStatus status) {
+    Payment(int id, int orderId, int sum, PaymentStatus status) {
         this.id = id;
-        this.clientId = clientId;
+        this.orderId = orderId;
         this.sum = sum;
         this.status = status;
     }
@@ -17,8 +17,8 @@ public class Payment {
         return id;
     }
 
-    public int getClientId() {
-        return clientId;
+    public int getOrderId() {
+        return orderId;
     }
 
     public void setId(int id) {

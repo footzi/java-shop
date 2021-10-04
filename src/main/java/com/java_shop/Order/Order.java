@@ -20,6 +20,10 @@ public class Order {
         this.status = status;
     }
 
+    public int getId() {
+        return id;
+    }
+
     public int getClientId() {
         return this.clientId;
     }
