@@ -11,3 +11,5 @@ CREATE TABLE orders (order_id serial PRIMARY KEY, client_id integer NOT NULL, su
 // Платежи
 CREATE TABLE payments (payment_id serial PRIMARY KEY, order_id integer NOT NULL, status varchar(32) NOT NULL, sum integer NOT NUll);
 
+// Категории
+CREATE TABLE categories (category_id serial PRIMARY KEY, name varchar(32) NOT NULL, parent_category_id integer);
