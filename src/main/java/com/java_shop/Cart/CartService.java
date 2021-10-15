@@ -14,6 +14,7 @@ public class CartService {
      */
     public static String buy(InputBuyCartDTO inputBuyCartDTO) throws SQLException {
         // Создаем новый заказ
+        // todo Нормально ли то что тут DTO из другого класса
         Order order = OrderService.add(inputBuyCartDTO);
 
         // Создаем новый платеж

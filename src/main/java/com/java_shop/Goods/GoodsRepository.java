@@ -30,16 +30,18 @@ public class GoodsRepository {
         String query = "SELECT * FROM goods WHERE good_id = " + id;
 
         DBConnectionInput input = new DBConnectionInput()
-                .addField("good_id", "int")
-                .addField("name", "string")
-                .addField("price", "int");
+            .addField("good_id", "int")
+            .addField("name", "string")
+            .addField("price", "int")
+            .addField("category_id", "int");
         DbConnectionResult result = DbConnection.executeQuery(query, input);
 
-        int goodId = result.getFieldInt("good_id");
-        String name = result.getFieldString("name");
-        int price = result.getFieldInt("price");
-
-        return new Good(goodId, name, price);
+        return new Good(
+            result.getFieldInt("good_id"),
+            result.getFieldString("name"),
+            result.getFieldInt("price"),
+            result.getFieldInt("category_id")
+        );
     }
 
     /**
@@ -49,20 +51,22 @@ public class GoodsRepository {
         String query = "SELECT * FROM goods";
 
         DBConnectionInput input = new DBConnectionInput()
-                .addField("good_id", "int")
-                .addField("name", "string")
-                .addField("price", "int");
+            .addField("good_id", "int")
+            .addField("name", "string")
+            .addField("price", "int")
+            .addField("category_id", "int");
 
         DbConnectionResultList resultList = DbConnection.executeQueryList(query, input);
 
         List<Good> goods = new ArrayList<Good>();
 
         for (DbConnectionResult result: resultList.getList()) {
-            int goodId = result.getFieldInt("good_id");
-            String name = result.getFieldString("name");
-            int price = result.getFieldInt("price");
-
-            Good good = new Good(goodId, name, price);
+            Good good = new Good(
+                result.getFieldInt("good_id"),
+                result.getFieldString("name"),
+                result.getFieldInt("price"),
+                result.getFieldInt("category_id")
+            );
 
             goods.add(good);
         }

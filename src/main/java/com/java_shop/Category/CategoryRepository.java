@@ -15,7 +15,7 @@ public class CategoryRepository {
      */
     public static Category add(Category category) throws SQLException {
         String values = "'" + category.getName() + "', " + category.getParentId();
-        String query = "INSERT INTO categories (name, parent_category_id) VALUES (" + values + ")";
+        String query = "INSERT INTO categories (name, sub_categories_id) VALUES (" + values + ")";
 
         int newGoodId = DbConnection.executeUpdate(query);
         category.setId(newGoodId);
@@ -32,7 +32,7 @@ public class CategoryRepository {
         DBConnectionInput input = new DBConnectionInput()
                 .addField("category_id", "int")
                 .addField("name", "string")
-                .addField("parent_category_id", "int");
+                .addField("parent_id", "int");
 
         DbConnectionResultList resultList = DbConnection.executeQueryList(query, input);
 
@@ -42,7 +42,7 @@ public class CategoryRepository {
             Category category = new Category(
                 result.getFieldInt("category_id"),
                 result.getFieldString("name"),
-                result.getFieldInt("parent_category_id")
+                result.getFieldInt("parent_id")
             );
 
             categories.add(category);

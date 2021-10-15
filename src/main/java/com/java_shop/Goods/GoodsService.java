@@ -10,7 +10,11 @@ public class GoodsService {
      * Добавление нового товара
      */
     public static Good add(InputAddGoodDTO inputAddGoodDTO) throws SQLException {
-        Good good = new Good(0, inputAddGoodDTO.getName(), inputAddGoodDTO.getPrice());
+        Good good = new Good(
+            0,
+            inputAddGoodDTO.getName(),
+            inputAddGoodDTO.getPrice(),
+            inputAddGoodDTO.getCategoryId());
 
         return GoodsRepository.add(good);
     }

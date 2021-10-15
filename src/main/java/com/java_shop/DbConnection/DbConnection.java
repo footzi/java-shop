@@ -25,13 +25,24 @@ public class DbConnection {
                     if (type.equals("int")) {
                         int result = resultSet.getInt(field);
 
-                        dbConnectionResult.setFieldInt(field, result);
+                        if (result == 0) {
+                            dbConnectionResult.setFieldInt(field, null);
+                        } else {
+                            dbConnectionResult.setFieldInt(field, result);
+                        }
                     }
 
                     if (type.equals("string")) {
                         String result = resultSet.getString(field);
 
                         dbConnectionResult.setFieldString(field, result);
+                    }
+
+                    if (type.equals("array")) {
+                        Array result = resultSet.getArray(field);
+                        Integer[] resultInteger = (Integer[])result.getArray();
+
+                        dbConnectionResult.setFieldArray(field, resultInteger);
                     }
                 }
             } else {
@@ -40,11 +51,15 @@ public class DbConnection {
                     String type = item.getValue();
 
                     if (type.equals("int")) {
-                        dbConnectionResult.setFieldInt(field, 0);
+                        dbConnectionResult.setFieldInt(field, null);
                     }
 
                     if (type.equals("string")) {
                         dbConnectionResult.setFieldString(field, "");
+                    }
+
+                    if (type.equals("array")) {
+                        dbConnectionResult.setFieldArray(field, null);
                     }
                 }
             }
@@ -71,13 +86,28 @@ public class DbConnection {
                     if (type.equals("int")) {
                         int result = resultSet.getInt(field);
 
-                        dbConnectionResult.setFieldInt(field, result);
+                        if (result == 0) {
+                            dbConnectionResult.setFieldInt(field, null);
+                        } else {
+                            dbConnectionResult.setFieldInt(field, result);
+                        }
                     }
 
                     if (type.equals("string")) {
                         String result = resultSet.getString(field);
 
                         dbConnectionResult.setFieldString(field, result);
+                    }
+
+                    if (type.equals("array")) {
+                        Array result = resultSet.getArray(field);
+
+                        if (result != null) {
+                            Integer[] resultInteger = (Integer[])result.getArray();
+                            dbConnectionResult.setFieldArray(field, resultInteger);
+                        } else {
+                            dbConnectionResult.setFieldArray(field, null);
+                        }
                     }
                 }
 
@@ -86,14 +116,6 @@ public class DbConnection {
             return resultList;
         }
     }
-
-//    public static void executeQueryObject(String query) throws SQLException {
-//        try (Connection conn = DriverManager.getConnection(DbConnection.DB_URL, DbConnection.USER, DbConnection.PASS);
-//             Statement stmt = conn.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE)
-//        ) {
-//            ResultSet resultSet = stmt.executeQuery(query);
-//        }
-//    }
 
     /**
      * Возвращает index созданной сущности

@@ -1,11 +1,13 @@
 package com.java_shop.Category;
 
 import com.java_shop.Category.DTOs.InputAddCategoryDTO;
-import com.java_shop.Category.DTOs.OutputGetAllCategoriesDTO;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class CategoryService {
     /**
@@ -21,19 +23,68 @@ public class CategoryService {
     /**
      * Получение всего списка категорий
      */
-    public static void getAll() throws SQLException {
+    public static List<Category> getAll() throws SQLException {
         List<Category> categories = CategoryRepository.getAll();
-        List<OutputGetAllCategoriesDTO> outputCategories = new ArrayList<>();
 
-        for(Category category: categories) {
-            int id = category.getId();
-            String name = category.getName();
-            Integer parentId = category.getParentId();
+        Map<Integer, List<Category>> groupedByParent = categories
+                .stream()
+                .collect(Collectors.groupingBy(category -> category.getParentId() == null ? 0 : category.getParentId()));
+
+        List<Category> rootCategories = groupedByParent.get(0);
+        rootCategories.forEach(category -> setSubCategory(category, groupedByParent));
+
+        return rootCategories;
+    }
+
+    /**
+     * Устанавливает подкатегории для категории
+     */
+    private static void setSubCategory(Category category, Map<Integer, List<Category>> groupedByParent) {
+        List<Category> children = groupedByParent.get(category.getId());
+
+        if (children != null) {
+            category.setSubCategories(children);
+
+            for (Category child : children) {
+                setSubCategory(child, groupedByParent);
+            }
+        }
+    }
+
+    /**
+     * Возвращает массив категорий для товара (Компьютеры -> Ноутбуки и планшеты -> Для дома и учебы)
+     */
+    public static void getCategories(int categoryId) throws SQLException {
+        List<Category> allCategories = CategoryRepository.getAll();
+        List<Category> categories = new ArrayList<>();
+
+        Category findedCategory = findCategory(allCategories, categoryId);
+
+        if (findedCategory != null) {
+            categories.add(findedCategory);
+        }
+
+        if (findedCategory.getParentId() != null) {
 
         }
 
 
+    }
 
-        System.out.println(CategoryRepository.getAll());
+    private static void set() {
+
+    }
+
+
+    private static Category findCategory(List<Category> allCategories, int categoryId) {
+        Optional<Category> findedCaegory = allCategories.stream().filter(category -> category.getId() == categoryId).findAny();
+
+        if (findedCaegory.isPresent()) {
+            return findedCaegory;
+        } else {
+            return null;
+        }
+
+//        return allCategories.stream().filter(category -> category.getId() == categoryId).findAny();
     }
 }

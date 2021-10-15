@@ -1,14 +1,16 @@
 package com.java_shop.Goods;
 
-public class Good implements IGood {
-    int id;
-    String name;
-    int price;
+public class Good {
+    private int id;
+    private final String name;
+    private final int price;
+    private final Integer categoryId;
 
-    public Good(int id, String name, int price) {
+    public Good(int id, String name, int price, Integer categoryId) {
         this.id = id;
         this.name = name;
         this.price = price;
+        this.categoryId = categoryId;
     }
 
     public void setId(int id) {
@@ -21,6 +23,10 @@ public class Good implements IGood {
 
     public int getPrice() {
         return price;
+    }
+
+    public Integer getCategoryId() {
+        return categoryId;
     }
 
     public String getName() {

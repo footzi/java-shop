@@ -33,11 +33,11 @@ public class CategoryController {
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> getAll() {
         try {
-            CategoryService.getAll();
-//            List<Good> goods = GoodsService.getAll();
-//            Response<List<Good>> response = new Response<>(goods);
+            List<Category> categories = CategoryService.getAll();
 
-            return ResponseEntity.ok("response.getBody()");
+            Response<List<Category>> response = new Response<>(categories);
+
+            return ResponseEntity.ok(response.getBody());
         } catch (SQLException error) {
             Response<String> response = new Response<>("", error.getMessage());
             return ResponseEntity.internalServerError().body(response.getBody());

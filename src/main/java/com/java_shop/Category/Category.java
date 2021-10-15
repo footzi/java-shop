@@ -1,10 +1,12 @@
 package com.java_shop.Category;
 
-public class Category {
-    int id;
-    String name;
-    Integer parentId;
+import java.util.List;
 
+public class Category {
+    private int id;
+    private final String name;
+    private final Integer parentId;
+    private List<Category> subCategories;
 
     public Category(int id, String name, Integer parentId) {
         this.id = id;
@@ -17,14 +19,22 @@ public class Category {
     }
 
     public int getId() {
-        return id;
+        return this.id;
+    }
+
+    public List<Category> getSubCategories() {
+        return this.subCategories;
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public Integer getParentId() {
-        return parentId;
+        return this.parentId;
+    }
+
+    public void setSubCategories(List<Category> subCategories) {
+        this.subCategories = subCategories;
     }
 }

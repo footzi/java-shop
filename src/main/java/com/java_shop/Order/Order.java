@@ -9,6 +9,7 @@ public class Order {
     int id;
     int clientId;
     int sum;
+    // todo Как правильней хранить значения в корзине
     List<CartValues> cartValues;
     OrderStatus status;
 
