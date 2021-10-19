@@ -58,15 +58,15 @@ public class CategoryService {
         List<Category> allCategories = CategoryRepository.getAll();
         List<Category> categories = new ArrayList<>();
 
-        Category findedCategory = findCategory(allCategories, categoryId);
+//        Category findedCategory = findCategory(allCategories, categoryId);
+//
+//        if (findedCategory != null) {
+//            categories.add(findedCategory);
+//        }
 
-        if (findedCategory != null) {
-            categories.add(findedCategory);
-        }
-
-        if (findedCategory.getParentId() != null) {
-
-        }
+//        if (findedCategory.getParentId() != null) {
+//
+//        }
 
 
     }
@@ -76,15 +76,16 @@ public class CategoryService {
     }
 
 
-    private static Category findCategory(List<Category> allCategories, int categoryId) {
-        Optional<Category> findedCaegory = allCategories.stream().filter(category -> category.getId() == categoryId).findAny();
-
-        if (findedCaegory.isPresent()) {
-            return findedCaegory;
-        } else {
-            return null;
-        }
+    private static void findCategory(List<Category> allCategories, int categoryId) {
+//        Optional<Category> findedCaegory = allCategories.stream().filter(category -> category.getId() == categoryId).findAny();
+//
+//        if (findedCaegory.isPresent()) {
+//            return findedCaegory;
+//        } else {
+//            return null;
+//        }
 
 //        return allCategories.stream().filter(category -> category.getId() == categoryId).findAny();
+        // }
     }
 }

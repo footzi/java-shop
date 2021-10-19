@@ -1,17 +1,17 @@
-// Товары
+-- Товары
 CREATE TABLE goods (good_id serial PRIMARY KEY, name varchar(128) NOT NULL, price integer NOT NUll, category_id integer);
 
-// Клиенты
+-- Клиенты
 CREATE TABLE clients (client_id serial PRIMARY KEY, name varchar(128) NOT NULL, surname varchar(128), address varchar(128) NOT NULL, phone varchar(32) NOT NULL UNIQUE);
--- INSERT INTO clients (name, surname, address, phone) VALUES ('Vladislav', 'Manakov', '199000, Saint-Petersburg', '+70000000000')
+INSERT INTO clients (name, surname, address, phone) VALUES ('Vladislav', 'Manakov', '199000, Saint-Petersburg', '+70000000000');
 
-// Заказы
+-- Заказы
 CREATE TABLE orders (order_id serial PRIMARY KEY, client_id integer NOT NULL, sum integer NOT NULL, status varchar(32) NOT NULL, cart json NOT NULL);
 
-// Платежи
+-- Платежи
 CREATE TABLE payments (payment_id serial PRIMARY KEY, order_id integer NOT NULL, status varchar(32) NOT NULL, sum integer NOT NUll);
 
-// Категории
+-- Категории
 CREATE TABLE categories (category_id serial PRIMARY KEY, name varchar(32) NOT NULL, parent_id integer);
 INSERT INTO categories (name) VALUES ('Компьютеры');
 INSERT INTO categories (name, parent_id) VALUES ('Ноутбуки и планшеты', 1);

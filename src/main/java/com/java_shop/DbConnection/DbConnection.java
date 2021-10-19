@@ -4,8 +4,9 @@ import java.sql.*;
 import java.util.Map;
 
 public class DbConnection {
-    static public final String DB_URL = "jdbc:postgresql://localhost/java_shop";
-    static public final String USER = "postgres";
+//    static public final String DB_URL = "jdbc:postgresql://database_container:5432/test";
+    static public final String DB_URL = "jdbc:postgresql://localhost/test";
+    static public final String USER = "admin";
     static public final String PASS = "admin";
 
 
