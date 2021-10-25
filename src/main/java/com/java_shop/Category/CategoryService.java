@@ -52,40 +52,9 @@ public class CategoryService {
     }
 
     /**
-     * Возвращает массив категорий для товара (Компьютеры -> Ноутбуки и планшеты -> Для дома и учебы)
+     * Получение категории
      */
-    public static void getCategories(int categoryId) throws SQLException {
-        List<Category> allCategories = CategoryRepository.getAll();
-        List<Category> categories = new ArrayList<>();
-
-//        Category findedCategory = findCategory(allCategories, categoryId);
-//
-//        if (findedCategory != null) {
-//            categories.add(findedCategory);
-//        }
-
-//        if (findedCategory.getParentId() != null) {
-//
-//        }
-
-
-    }
-
-    private static void set() {
-
-    }
-
-
-    private static void findCategory(List<Category> allCategories, int categoryId) {
-//        Optional<Category> findedCaegory = allCategories.stream().filter(category -> category.getId() == categoryId).findAny();
-//
-//        if (findedCaegory.isPresent()) {
-//            return findedCaegory;
-//        } else {
-//            return null;
-//        }
-
-//        return allCategories.stream().filter(category -> category.getId() == categoryId).findAny();
-        // }
+    public static Category getCategory(int id) throws SQLException {
+        return CategoryRepository.getCategory(id);
     }
 }

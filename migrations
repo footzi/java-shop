@@ -13,6 +13,11 @@ CREATE TABLE payments (payment_id serial PRIMARY KEY, order_id integer NOT NULL,
 
 -- Категории
 CREATE TABLE categories (category_id serial PRIMARY KEY, name varchar(32) NOT NULL, parent_id integer);
+
+INSERT INTO goods (name, price, category_id) VALUES ('15.6 Ноутбук MSI Bravo 15 A4DCR-402XRU2-402', 62000, 4);
+
+INSERT INTO goods (name, price, category_id) VALUES ('Oldi OFFICE 0759869 AMD A8-9600', 16990, 5);
+
 INSERT INTO categories (name) VALUES ('Компьютеры');
 INSERT INTO categories (name, parent_id) VALUES ('Ноутбуки и планшеты', 1);
 INSERT INTO categories (name, parent_id) VALUES ('Ноутбуки для дома и учебы', 2);

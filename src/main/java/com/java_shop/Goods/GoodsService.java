@@ -1,5 +1,7 @@
 package com.java_shop.Goods;
 
+import com.java_shop.Category.Category;
+import com.java_shop.Category.CategoryService;
 import com.java_shop.Goods.DTOs.InputAddGoodDTO;
 
 import java.sql.SQLException;
@@ -30,6 +32,12 @@ public class GoodsService {
      * Получение всего списка товаров
      */
     public static List<Good> getAll() throws SQLException {
-        return GoodsRepository.getAll();
+        List<Good> goods = GoodsRepository.getAll();
+
+        for (Good good : goods) {
+            Category category = CategoryService.getCategory(good.getCategoryId());
+            good.setCategory(category);
+        }
+        return goods;
     }
 }

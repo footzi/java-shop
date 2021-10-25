@@ -50,4 +50,23 @@ public class CategoryRepository {
 
         return categories;
     }
+
+    /**
+     * Получение категории
+     */
+    public static Category getCategory(int id) throws SQLException {
+        String query = "SELECT * FROM categories WHERE category_id = " + id;
+
+        DBConnectionInput input = new DBConnectionInput()
+                .addField("category_id", "int")
+                .addField("name", "string")
+                .addField("parent_id", "int");
+        DbConnectionResult result = DbConnection.executeQuery(query, input);
+
+        return new Category(
+            result.getFieldInt("category_id"),
+            result.getFieldString("name"),
+            result.getFieldInt("parent_id")
+        );
+    }
 }
